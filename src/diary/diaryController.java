@@ -187,7 +187,7 @@ public class diaryController {
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
             //link to google form
-            desktop.browse(new URI("https://docs.google.com/forms/d/e/1FAIpQLSeU6sWqUA_aJXM3MChi0HtdVmq8TeXuaPudR7wmp2grFCrApQ/viewform?usp=pp_url"));
+            desktop.browse(new URI("https://linktr.ee/melekkm"));
         } catch (Exception e) {
             e.printStackTrace();
         }
