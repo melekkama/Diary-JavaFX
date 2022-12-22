@@ -29,7 +29,7 @@
                   <Font name="Forte" size="31.0" />
                </font>
             </Text>
-            <PasswordField id="password" layoutX="35.0" layoutY="297.0" prefHeight="44.0" prefWidth="130.0">
+            <PasswordField id="password" fx:id="password" alignment="CENTER" layoutX="35.0" layoutY="297.0" prefHeight="51.0" prefWidth="216.0">
                <font>
                   <Font size="24.0" />
                </font></PasswordField>
