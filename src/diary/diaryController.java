@@ -1,6 +1,9 @@
 package diary;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -31,9 +34,9 @@ public class diaryController {
     public ToggleGroup fontGroup;
 
     private List<DiaryPage> book;
-    private List<String> dictionary;
     private String oldContent="";
     private String oldDate;
+    static Scene scene;
 
     public void initialize(){
         //limit title text area to 1 row and less than 30 characters
@@ -54,7 +57,6 @@ public class diaryController {
         datePick.getEditor().setText(formatter.format(date));
         //arrayList to store each diaryPage and every words in dictionary
         book= new ArrayList<>();
-        dictionary = new ArrayList<>();
         //read from txt file for existing diary pages and dictionary
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File("src/diary/content.txt")));
@@ -71,13 +73,6 @@ public class diaryController {
                     content = content + line + System.lineSeparator();
                 }
                 book.add(new DiaryPage(date,title,content,lineCount));
-                line = reader.readLine();
-            }
-            reader.close();
-            reader = new BufferedReader(new FileReader(new File("src/extra/words.txt")));
-            line= reader.readLine();
-            while (line != null){
-                dictionary.add(line);
                 line = reader.readLine();
             }
             reader.close();
@@ -192,7 +187,19 @@ public class diaryController {
             e.printStackTrace();
         }
     }
+   /* public void changePassword() {
+    	
+    }*/
 
+    @FXML
+    private void changePassword() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("password.fxml"));
+        scene= new Scene(root,800,502);
+        scene.getStylesheets().add(getClass().getResource("/extra/light_theme.css").toExternalForm());
+        scene.getRoot().requestFocus();
+        Main.window.setScene(scene);
+
+    }
     public void exit() { Main.window.hide(); }
 
     public void saveFile() {

@@ -46,6 +46,11 @@ fx:controller="diary.diaryController"
               <MenuItem fx:id="feedbackMenu" mnemonicParsing="false" onAction="#feedback" text="Feedback" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Password">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
       <DatePicker fx:id="datePick" editable="false" layoutX="84.0" layoutY="38.0" />
