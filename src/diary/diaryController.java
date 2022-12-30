@@ -39,7 +39,7 @@ public class diaryController {
     static Scene scene;
 
     public void initialize(){
-        //limit title text area to 1 row and less than 30 characters
+        //constraint title 
         titleBox.setTextFormatter( new TextFormatter<>(c -> {
             if(c.getControlNewText().length() > 30 ) return null;
             boolean error=false;
@@ -86,31 +86,14 @@ public class diaryController {
 
     @FXML
     private void loadDiary(){
-        Alert alert;    //alert box variable
-        if(!oldContent.equals(contentBox.getText())){   //if changes in content text area detected
-            alert=new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm load diary?");
-            alert.setHeaderText(null);
-            alert.setContentText("Changes detected in content.\nSave diary before loading?");
-            ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
-            alert.getButtonTypes().setAll(yesButton, noButton);
-            Optional<ButtonType> result = alert.showAndWait();
-            //noinspection OptionalGetWithoutIsPresent
-            if(result.get()==yesButton){
-                String newDate=datePick.getEditor().getText();
-                datePick.getEditor().setText(oldDate);
-                saveDiary();
-                datePick.getEditor().setText(newDate);
-            } //if no then do nothing
-        }
+    	Alert alert;
         String datePicked = datePick.getEditor().getText();
         //check if there is diary page to be loaded on that day
         boolean found=false;
-        for (DiaryPage aBook : book) {
-            if(aBook.getDate().equals(datePicked)){
-                titleBox.setText(aBook.getTitle());
-                contentBox.setText(aBook.getContent());
+        for (DiaryPage page : book) {
+            if(page.getDate().equals(datePicked)){
+                titleBox.setText(page.getTitle());
+                contentBox.setText(page.getContent());
                 found=true;
                 break;
             }
@@ -151,9 +134,9 @@ public class diaryController {
         for (char c : chars)
             if (c == '\n')
                 lineCount++;
-        for (DiaryPage aBook : book)
-            if (aBook.getDate().equals(datePick.getEditor().getText())) {
-                aBook.setDiary(datePick.getEditor().getText(), title, content, lineCount);
+        for (DiaryPage page : book)
+            if (page.getDate().equals(datePick.getEditor().getText())) {
+            	page.setDiary(datePick.getEditor().getText(), title, content, lineCount);
                 found = true;
                 break;
             }
